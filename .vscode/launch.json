@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/akanksha/Desktop/C",
-      "program": "/home/akanksha/Desktop/C/build/Debug/outDebug",
+      "cwd": "/home/akanksha/Desktop/C/searching-algo",
+      "program": "/home/akanksha/Desktop/C/searching-algo/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
