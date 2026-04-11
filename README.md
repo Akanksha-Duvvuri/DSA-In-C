@@ -4,4 +4,4 @@
 
 1. 05/04 - searching algorithms, sorting algorithms, Big O notations, TC and SC
 2. 10/04 - singly LL 
-3. 11/04 - circle LL, doubly LL
+3. 11/04 - circle LL, doubly LL, Stacks
