@@ -13,6 +13,6 @@ int main() {
     int arr[7] = {2, 5, 1, 10, 39, 0, 92};
     int n = sizeof(arr) / sizeof(int);
     
-    printf("%d\n", linear(arr, 7, 10));
+    printf("value found at: %d\n", linear(arr, 7, 11));
     return 0;
 }

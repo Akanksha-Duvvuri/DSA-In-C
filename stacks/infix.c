@@ -1,76 +1,61 @@
 #include <stdio.h>
-#include <ctype.h>
-#define MAX 100
 
-// ---- char stack for infix to postfix ----
-char cstack[MAX];
-int ctop = -1;
+char stack[100];
+int top = -1;
 
-void cpush(char x) { cstack[++ctop] = x; }
-char cpop() { return cstack[ctop--]; }
-char cpeek() { return cstack[ctop]; }
+void push(char x){
+    stack[++top] = x;
+}
 
-// ---- int stack for evaluation ----
-int istack[MAX];
-int itop = -1;
+char pop(){
+    return stack[top--];
+}
 
-void ipush(int x) { istack[++itop] = x; }
-int ipop() { return istack[itop--]; }
+char peek(){
+    return stack[top];
+}
 
-// ---- precedence ----
-int precedence(char op) {
-    if (op == '+' || op == '-') { return 1; }
-    if (op == '*' || op == '/') { return 2; }
+int priority(char x){
+    if(x == '+' || x == '-'){
+        return 1;
+    }
+    if(x == '*' || x == '/'){
+        return 2;
+    }
     return 0;
 }
 
-// ---- infix to postfix ----
-void infixToPostfix(char exp[], char postfix[]) {
+void infixToPostfix(char infix[], char postfix[]){
     int k = 0;
-    for (int i = 0; exp[i] != '\0'; i++) {
-        if (isalnum(exp[i])) {
-            postfix[k++] = exp[i];
-        } else if (exp[i] == '(') {
-            cpush(exp[i]);
-        } else if (exp[i] == ')') {
-            while (cpeek() != '(') { postfix[k++] = cpop(); }
-            cpop();
-        } else {
-            while (ctop != -1 && precedence(cpeek()) >= precedence(exp[i])) {
-                postfix[k++] = cpop();
+
+    for(int i = 0; infix[i] != '\0'; i++){
+
+        if(infix[i] >= '0' && infix[i] <= '9'){
+            postfix[k++] = infix[i];
+        }
+        else{
+            while(top != -1 && priority(peek()) >= priority(infix[i])){
+                postfix[k++] = pop();
             }
-            cpush(exp[i]);
+
+            push(infix[i]);
         }
     }
-    while (ctop != -1) { postfix[k++] = cpop(); }
+
+    while(top != -1){
+        postfix[k++] = pop();
+    }
+
     postfix[k] = '\0';
 }
 
-// ---- evaluate postfix ----
-int evaluate(char exp[]) {
-    for (int i = 0; exp[i] != '\0'; i++) {
-        if (isdigit(exp[i])) {
-            ipush(exp[i] - '0');
-        } else {
-            int b = ipop();
-            int a = ipop();
-            if (exp[i] == '+') { ipush(a + b); }
-            else if (exp[i] == '-') { ipush(a - b); }
-            else if (exp[i] == '*') { ipush(a * b); }
-            else if (exp[i] == '/') { ipush(a / b); }
-        }
-    }
-    return ipop();
-}
+int main(){
+    char infix[100] = "2+3*4";
+    char postfix[100];
 
-// ---- main ----
-int main() {
-    char exp[] = "2+3*4";
-    char postfix[MAX];
+    infixToPostfix(infix, postfix);
 
-    infixToPostfix(exp, postfix);
-    printf("Postfix: %s\n", postfix);
-    printf("Result: %d\n", evaluate(postfix));
+    printf("Postfix = %s\n", postfix);
 
     return 0;
 }

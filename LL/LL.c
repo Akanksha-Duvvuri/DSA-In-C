@@ -23,7 +23,7 @@ Node* createNode(int data) {
     return newnode;
 }
 
-void insertBegin(int data) {
+void insertatfront(int data) {
     Node* newnode = createNode(data);
 
     if(head == NULL) {
@@ -34,7 +34,7 @@ void insertBegin(int data) {
     }
 }
 
-void insertend(int data) {
+void insertatend(int data) {
     Node* newnode = createNode(data);
 
     if(head == NULL) {
@@ -45,7 +45,7 @@ void insertend(int data) {
     }
 }
 
-void deletefront(){
+void deleteatfront(){
     Node* temp = head;
 
     if(head == NULL) {
@@ -57,7 +57,7 @@ void deletefront(){
     free(temp);
 }
 
-void deleteback(){
+void deleteatend(){
     Node* temp = head;
 
     while(temp->next->next != NULL) {
@@ -67,7 +67,7 @@ void deleteback(){
     temp->next = NULL;
 }
 
-void deleteatpos(int position) {
+void deleteatposition(int position) {
     Node* temp = head;
 
     for(int i=0; i<position-1; i++) {
@@ -77,7 +77,7 @@ void deleteatpos(int position) {
     temp->next = temp->next->next;
 }
 
-void insertpos(int data, int position) {
+void insertatposition(int data, int position) {
     Node* newnode = createNode(data);
     Node* temp = head;
 
@@ -94,7 +94,7 @@ void insertpos(int data, int position) {
     temp->next = newnode;
 }
 
-void rev(){
+void reverseLL(){
     Node* prev = NULL;
     Node* curr = head;
     Node* next = NULL;
@@ -111,7 +111,7 @@ void rev(){
     head = prev;
 }
 
-void print() {
+void printLL() {
     Node* temp = head;
 
     while(temp != NULL) {
@@ -123,37 +123,34 @@ void print() {
 
 int main() {
 
-    insertBegin(5);
-    insertBegin(4);
-    insertBegin(3);
-    insertBegin(2);
-    insertBegin(1);
+    insertatfront(5);
+    insertatfront(3);
+    insertatfront(2);
 
-    print();
+    printLL();
 
-    // insertend(6);
-    // insertend(7);
-    // insertend(8);
+    insertatend(6);
 
-    // print();
+    printLL();
 
-    // deletefront();
+    insertatposition(4, 2);
 
-    // print();
+    printLL();
 
-    // deleteback();
+    deleteatend();
 
-    // print();
+    printLL();
 
-    // deleteatpos(2);
-    
-    // print();
+    deleteatfront();
 
-    // insertpos(3, 2);
+    printLL();
 
-    // print();
+    deleteatposition(2);
 
-    rev();
-    print();
+    printLL();
+
+    reverseLL();
+
+    printLL();
     return 0;
 }

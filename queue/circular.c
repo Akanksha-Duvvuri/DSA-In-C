@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-#define MAX 5
+#define MAX 10
 
 int queue[MAX];
 int rear = -1;
@@ -16,8 +16,9 @@ int isEmpty() {
 }
 
 void enqueue(int data){
-    if(isFull){
+    if(isFull()){
         printf("queue overflow\n");
+        return;
     }
 
     if(front == -1){
@@ -36,7 +37,7 @@ void dequeue() {
     }
 
     if(front == rear) {
-        front = rear = -2;
+        front = rear = -1;
     } else {
         front = (front + 1) % MAX;
     }
